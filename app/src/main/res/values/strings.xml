@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Spotify</string>
+
+    <!-- Home Route -->
+    <string name="home_title_navigation">Home</string>
+
+    <!-- Playlist Route -->
+    <string name="play_list_title_navigation">Playlist</string>
+
+    <!-- History Route -->
+    <string name="history_title_navigation">History</string>
+
+    <!-- Profile Route -->
+    <string name="profile_title_navigation">Profile</string>
+
+</resources>
