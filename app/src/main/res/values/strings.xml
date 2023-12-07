@@ -7,6 +7,9 @@
     <!-- Playlist Route -->
     <string name="play_list_title_navigation">Playlist</string>
 
+    <!-- Main Route -->
+    <string name="main_title_navigation">Main</string>
+
     <!-- History Route -->
     <string name="history_title_navigation">History</string>
 

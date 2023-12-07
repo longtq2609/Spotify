@@ -12,6 +12,7 @@ import com.example.spotify.component.SpotifyScaffold
 import com.example.spotify.screen.history.navigation.historyScreen
 import com.example.spotify.screen.home.navigation.homeNavigationRoute
 import com.example.spotify.screen.home.navigation.homeScreen
+import com.example.spotify.screen.main.navigation.mainScreen
 import com.example.spotify.screen.playlist.navigation.playListScreen
 import com.example.spotify.screen.profile.navigation.profileScreen
 import com.google.accompanist.navigation.animation.AnimatedNavHost
@@ -45,6 +46,7 @@ fun NavGraph() {
         ) {
             homeScreen()
             playListScreen()
+            mainScreen()
             historyScreen()
             profileScreen()
         }

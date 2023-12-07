@@ -1,4 +1,4 @@
-package com.example.spotify.screen.playlist
+package com.example.spotify.screen.main
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,16 +9,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.spotify.R
 import com.example.spotify.component.SpotifyScaffold
 import com.example.spotify.component.SpotifyText
 import com.example.spotify.component.SpotifyTopBar
-import com.example.spotify.screen.main.MainScreen
 import com.example.spotify.ui.theme.Black
 
 @Composable
-fun PlayListScreen(
-    viewModel: PlayListViewModel
+fun MainScreen(
+    viewModel: MainViewModel = hiltViewModel()
 ) {
     val scaffoldState = rememberScaffoldState()
     val viewState by viewModel.uiState.collectAsState()
@@ -29,8 +29,8 @@ fun PlayListScreen(
         backgroundColor = Black,
         topBar = {
             SpotifyTopBar(
-                text = stringResource(id = R.string.play_list_title_navigation),
-                actionIcon = R.drawable.ic_add,
+                text = stringResource(id = R.string.main_title_navigation),
+                actionIcon = R.drawable.ic_more,
                 backgroundColor = Black,
                 isShowLogo = false
             )
@@ -46,7 +46,7 @@ private fun Content(
 
 ) {
     Box(modifier = Modifier.fillMaxSize()) {
-        SpotifyText(text = stringResource(id = R.string.play_list_title_navigation))
+        SpotifyText(text = stringResource(id = R.string.main_title_navigation))
     }
 }
 

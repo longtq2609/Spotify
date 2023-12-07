@@ -3,11 +3,10 @@
 package com.example.spotify.screen.playlist.navigation
 
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
-import com.example.spotify.screen.home.HomeScreen
-import com.example.spotify.screen.home.navigation.homeNavigationRoute
 import com.example.spotify.screen.playlist.PlayListScreen
 import com.google.accompanist.navigation.animation.composable
 
@@ -22,6 +21,7 @@ fun NavController.navigationPlayList(
 fun NavGraphBuilder.playListScreen() {
     composable(playListNavigationRoute) {
         PlayListScreen(
+            hiltViewModel()
         )
     }
 }

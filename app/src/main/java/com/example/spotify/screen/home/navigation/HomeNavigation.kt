@@ -18,9 +18,11 @@ fun NavController.navigationHome(
     this.navigate(homeNavigationRoute, navOptions)
 }
 
+@OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.homeScreen() {
     composable(homeNavigationRoute) {
         HomeScreen(
+            hiltViewModel()
         )
     }
 }
