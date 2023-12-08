@@ -1,7 +1,9 @@
 package com.example.spotify.component
 
-import android.util.Log
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.BottomAppBar
 import androidx.compose.material.BottomNavigationItem
@@ -10,6 +12,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
@@ -21,6 +24,7 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.navOptions
 import androidx.tracing.trace
+import com.example.spotify.R
 import com.example.spotify.navigation.BottomNav
 import com.example.spotify.screen.history.navigation.navigationHistory
 import com.example.spotify.screen.home.navigation.navigationHome
@@ -38,38 +42,49 @@ fun SpotifyBottomAppBar(
     currentDestination: NavDestination?
 ) {
     BottomAppBar(
-        modifier = Modifier,
+        modifier = Modifier.height(75.dp),
         backgroundColor = Grey
     ) {
         BottomNav.values().forEach { screen ->
             val selected = currentDestination.isBottomNavDestinationInHierarchy(screen)
             val primaryColor = MaterialTheme.colors.primary
             val secondaryColor = MaterialTheme.colors.secondary
-            val showLabel = screen.id != 2
+            val isMain = screen.id != 2
             BottomNavigationItem(
                 modifier = Modifier,
-                alwaysShowLabel = showLabel,
+                alwaysShowLabel = true,
                 selectedContentColor = MaterialTheme.colors.primary,
                 unselectedContentColor = Black,
                 icon = {
-                    Icon(
-                        imageVector = ImageVector.vectorResource(id = screen.iconId),
-                        contentDescription = null,
-                        tint = if (selected) primaryColor else secondaryColor,
-                        modifier = Modifier.size(32.dp)
-                    )
+                    if(isMain){
+                        Icon(
+                            imageVector = ImageVector.vectorResource(id = screen.iconId),
+                            contentDescription = null,
+                            tint = if (selected) primaryColor else secondaryColor,
+                            modifier = Modifier.size(32.dp)
+                        )
+                    }else{
+                        Image(
+                            painterResource(R.drawable.ic_logo_spotify),
+                            contentDescription = "",
+                            modifier = Modifier.fillMaxWidth().height(64.dp)
+                        )
+                    }
+
                 },
 
                 label = {
-                    SpotifyText(
-                        text =  stringResource(
-                            id = screen.titleTextId
-                        ),
-                        color = if (selected) primaryColor else secondaryColor,
-                        style = MaterialTheme.typography.overline,
-                        textAlign = TextAlign.Center,
-                        maxLines = 1
-                    )
+                    if (isMain) {
+                        SpotifyText(
+                            text = stringResource(
+                                id = screen.titleTextId
+                            ),
+                            color = if (selected) primaryColor else secondaryColor,
+                            style = MaterialTheme.typography.overline,
+                            textAlign = TextAlign.Center,
+                            maxLines = 1
+                        )
+                    }
                 },
                 selected = selected,
                 onClick = {
@@ -82,7 +97,6 @@ fun SpotifyBottomAppBar(
 
 fun navigateToBottomNavDestination(bottomNav: BottomNav, navController: NavController) {
     trace("Navigation: ${bottomNav.name}") {
-        Log.e("longtq", "navigateToBottomNavDestination: ${bottomNav.name}")
         val bottomNavOptions = navOptions {
             popUpTo(navController.graph.findStartDestination().id) {
                 saveState = true

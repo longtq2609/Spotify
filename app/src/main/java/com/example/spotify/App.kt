@@ -12,7 +12,6 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Stable
-@Singleton
 @HiltAndroidApp
 class AppBase : Application() {
     val isDark = mutableStateOf(false)
@@ -21,12 +20,4 @@ class AppBase : Application() {
     fun toogleTheme(){
         isDark.value = !isDark.value
     }
-}
-
-@Module
-@InstallIn(SingletonComponent::class)
-class ApplicationModule {
-
-    @Provides
-    fun provideApplication(): AppBase = AppBase()
 }
